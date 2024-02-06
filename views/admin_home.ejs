@@ -1,0 +1,106 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f0f0f0;
+            }
+            .table {
+                border-collapse: collapse;
+                width: 100%;
+                background-color: #fff;
+            }
+            .tdark {
+                background-color: #004c97;
+                color: #ffffff;
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            th {
+                height: 50px;
+            }
+            tr:hover {
+                background-color: #f5f5f5;
+            }
+            .update-btn, .delete-btn {
+                cursor: pointer;
+                background-color: #007bff; /* Blue for update */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 15px;
+                margin-right: 5px;
+                text-decoration: none; /* Remove underline from links */
+                display: inline-block; /* Align properly with other inline elements */
+            }
+            .delete-btn {
+                background-color: #dc3545; /* Red for delete */
+            }
+            .update-btn:hover, .delete-btn:hover {
+                opacity: 0.7;
+            }
+        </style>
+        
+          <script type="text/javascript">  
+            if(performance.navigation.type == 2){
+               location.reload(true);
+            }
+          </script>
+    </head>
+    <body>
+
+        <h1>Hello <%=user.userName%></h1>
+        <a href="/" class="update-btn">Sign out</a><br><br><br>
+        <form action="/new_task">
+            <button class="update-btn" >Create task</button>
+        </form>
+        
+        <h1>ALL OPEN TASKS</h1>
+        <form action="/update_task" method="post">
+            <table class="table">
+                <thead class="tdark">   
+                    <tr>
+                    <th>Task Number</th>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Task type</th>
+                    <th>Asset Number</th>
+                    <th>Model</th>
+                    <th>Engineer</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i = 0; i < tasks.length; i++){ %>
+                    <tr>
+                    <td><%= tasks[i].number %></td>
+                    <td><%= tasks[i].name %></td>
+                    <td><%= tasks[i].email %></td>
+                    <td><%= tasks[i].type %></td>
+                    <td><%= tasks[i].pcnumber %></td>
+                    <td><%= tasks[i].model %></td>
+                    <td><%= tasks[i].owner %></td>
+                    <td><%= tasks[i].status %></td>
+                    <td>
+                        <a href="/update_task?id=<%= tasks[i]._id %>" class="update-btn">Update</a>
+                        <a class="delete-btn" data-id="<%= tasks[i]._id %>">Delete</a>
+                    </td>                
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/public/js/index.js"></script>
+</body>
+</html>
