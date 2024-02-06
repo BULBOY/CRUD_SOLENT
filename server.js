@@ -24,7 +24,7 @@ app.use(morgan('dev'));// Use morgan in development mode for logging HTTP reques
 app.use('/public', express.static("public"));
 
 // Import and use router from the project's routes
-const projectRoute = require('../CRUD/routes/router');
+const projectRoute = require('../CRUD_SOLENT/routes/router');
 app.use('/',projectRoute);
 
 // Start the server on port 3000
